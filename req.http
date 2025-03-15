@@ -1,0 +1,7 @@
+###
+post http://localhost:3000/rem-data
+Content-Type: application/json
+
+{
+    "name": "Jagadeeswar",
+}
