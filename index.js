@@ -50,6 +50,7 @@ app.post(
         console.log(`deleted user ${doc.id}`);
         res.send({ message: `User deleted successfully,${user.name}` });
       });
+      
     }
     // res.send({ message: `to remove user ${req.body.name}` });
   })
