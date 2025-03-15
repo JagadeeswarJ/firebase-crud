@@ -1,7 +1,27 @@
 ###
+get http://localhost:3000/get-data
+
+
+###
+post http://localhost:3000/add-data
+Content-Type: application/json
+
+{
+    "name": "jagadeeswar"
+}
+###
 post http://localhost:3000/rem-data
 Content-Type: application/json
 
 {
-    "name": "Jagadeeswar",
+    "name": "jagadeeswar"
+}
+###
+
+post http://localhost:3000/update-data
+Content-Type: application/json
+
+{
+    "name": "jagadeeswar1",
+    "newName": "jagadeeswar"
 }
