@@ -30,8 +30,6 @@ app.post(
       console.log("User added successfully");
       res.status(200).send({ message: "User added successfully" });
     });
-    res.send({ message: `to remove user ${req.body.name}` });
-    const userDoc = await db.collection("users").add(a);
   })
 );
 
@@ -50,7 +48,6 @@ app.post(
         console.log(`deleted user ${doc.id}`);
         res.send({ message: `User deleted successfully,${user.name}` });
       });
-      
     }
     // res.send({ message: `to remove user ${req.body.name}` });
   })
@@ -71,6 +68,29 @@ app.post("/update-data", async (req, res) => {
   }
 });
 
+// transactions demo
+app.get("/update-transactions", async (req, res) => {
+  db.runTransaction(
+    async (transaction) => {
+      const userRef = db.collection("users").doc("29A3La7ts3r49DfGjuu3");
+      const doc = await transaction.get(userRef);
+      if (!doc.exists) {
+        console.log("Document does not exist!");
+        return;
+      }
+      const newAge = 18;
+      transaction.update(userRef, { age: newAge });
+    },
+    (err) => {
+      if (err) {
+        console.log("Transaction failed: ", err);
+      } else {
+        console.log("Transaction successfully committed!");
+      }
+    }
+  );
+  res.send({ message: "Transaction demo" });
+});
 const port = 3000;
 app.listen(port, () => {
   console.log(`server listening on ${port}`);
